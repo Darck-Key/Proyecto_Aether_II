@@ -16,6 +16,7 @@
 *.nar
 *.ear
 *.zip
+!Aether2.0.zip
 *.tar.gz
 *.rar
 
