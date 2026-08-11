@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>aether-mission-control</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>AETHER Mission Control Simulator</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>17</maven.compiler.release>
+        <javafx.version>21.0.6</javafx.version>
+        <junit.version>5.12.1</junit.version>
+        <mockito.version>5.12.0</mockito.version>
+        <jacoco.version>0.8.12</jacoco.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.orekit</groupId>
+            <artifactId>orekit</artifactId>
+            <version>12.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hipparchus</groupId>
+            <artifactId>hipparchus-geometry</artifactId>
+            <version>3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hipparchus</groupId>
+            <artifactId>hipparchus-ode</artifactId>
+            <version>3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.4.0</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>Aether2.0</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <!-- Orekit se entrega como ZIP externo para que funcione fuera del proyecto. -->
+                    <exclude>orekit-data/**</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <release>${maven.compiler.release}</release>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <mainClass>com.example.demoaether/com.example.demoaether.Launcher</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Conserva el POM original y produce un unico JAR con dependencias. -->
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <!-- Firmas y descriptores modulares no son validos al fusionar JARs. -->
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                        <exclude>module-info.class</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.example.demoaether.Launcher</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <useModulePath>true</useModulePath>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>3.5.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <configuration>
+                    <excludes>
+                        <exclude>com/example/demoaether/HelloApplication*</exclude>
+                        <exclude>com/example/demoaether/HelloController*</exclude>
+                        <exclude>com/example/demoaether/Launcher*</exclude>
+                        <exclude>com/example/demoaether/MissionMap3D*</exclude>
+                        <exclude>com/example/demoaether/MissionInput*</exclude>
+                        <exclude>com/example/demoaether/MissionPresets*</exclude>
+                        <exclude>com/example/demoaether/MySqlAetherRepository*</exclude>
+                        <exclude>com/example/demoaether/PendingDatabaseRepository*</exclude>
+                        <exclude>com/example/demoaether/NetworkQualityService*</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>check</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule>
+                                    <element>BUNDLE</element>
+                                    <limits>
+                                        <limit>
+                                            <counter>CLASS</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.60</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <source>${maven.compiler.release}</source>
+                    <encoding>UTF-8</encoding>
+                    <doclint>none</doclint>
+                    <quiet>true</quiet>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>crear-paquete-despliegue</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Arma la carpeta y el ZIP que se entregan sin requerir IntelliJ ni Maven. -->
+                            <target>
+                                <property name="deployment.root" value="${project.basedir}/paquete-despliegue"/>
+                                <property name="deployment.app" value="${deployment.root}/Aether2.0"/>
+
+                                <delete dir="${deployment.app}"/>
+                                <delete file="${deployment.root}/Aether2.0-paquete-despliegue.zip"/>
+                                <mkdir dir="${deployment.app}"/>
+
+                                <copy file="${project.build.directory}/${project.build.finalName}.jar"
+                                      tofile="${deployment.app}/Aether2.0.jar"/>
+                                <copy todir="${deployment.app}">
+                                    <fileset dir="${project.basedir}/src/deployment"/>
+                                </copy>
+                                <zip destfile="${deployment.app}/orekit-data.zip"
+                                     basedir="${project.basedir}/src/main/resources/orekit-data"/>
+
+                                <zip destfile="${deployment.root}/Aether2.0-paquete-despliegue.zip">
+                                    <zipfileset dir="${deployment.app}"
+                                                prefix="Aether2.0"
+                                                excludes="run.sh"/>
+                                    <zipfileset dir="${deployment.app}"
+                                                prefix="Aether2.0"
+                                                includes="run.sh"
+                                                filemode="755"/>
+                                </zip>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

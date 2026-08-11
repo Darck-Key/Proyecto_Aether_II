@@ -1,0 +1,52 @@
+
+/* Fondo principal */
+.root {
+    -fx-background-color: #05030D;
+}
+
+/* Texto general */
+.label {
+    -fx-text-fill: #E7D8F0;
+    -fx-font-size: 14px;
+}
+
+/* Título principal */
+.title {
+    -fx-text-fill: #C79CFF;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+/* Títulos de sección */
+.section-title {
+    -fx-text-fill: #6FD6FF;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/* Paneles principales */
+.panel {
+    -fx-background-color: #120B25;
+    -fx-border-color: #7A4FA3;
+    -fx-border-width: 1.5;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-padding: 15;
+}
+
+/* Tarjetas individuales */
+.card {
+    -fx-background-color: #1F1736;
+    -fx-border-color: #7A4FA3;
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 10;
+}
+
+/* Valor destacado */
+.value {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
