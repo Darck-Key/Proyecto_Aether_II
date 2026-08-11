@@ -1,0 +1,32 @@
+PAQUETE DE DESPLIEGUE - AETHER 2.0
+==================================
+
+CONTENIDO
+- Aether2.0.jar: aplicacion ejecutable con sus dependencias.
+- orekit-data.zip: efemerides, EOP, segundos intercalares y modelos de gravedad.
+- INICIAR-AETHER.cmd: abre directamente la interfaz en Windows.
+- run.bat: inicio en Windows.
+- run.sh: inicio desde una terminal compatible con sh, por ejemplo Git Bash.
+
+REQUISITO
+- JDK 17 o una version posterior disponible en PATH.
+- No se necesita IntelliJ, Maven ni el codigo fuente para ejecutar el paquete.
+
+EJECUCION
+- Windows, inicio directo: haga doble clic en INICIAR-AETHER.cmd.
+- Windows, con diagnosticos: ejecute .\run.bat en PowerShell.
+- Git Bash: ejecute ./run.sh.
+
+VERIFICACION RAPIDA DEL PAQUETE
+- Windows: .\run.bat --verificar-despliegue
+- Git Bash: ./run.sh --verificar-despliegue
+- El resultado correcto termina con: DESPLIEGUE AETHER: OK
+
+IMPORTANTE
+- Mantenga juntos el JAR, orekit-data.zip y el script de su sistema.
+- La conexion MySQL usa la configuracion de la aplicacion. Si el servidor no esta
+  disponible, AETHER conserva el comportamiento de respaldo implementado por el equipo.
+
+GENERACION DEL PAQUETE
+- Desde el proyecto: mvn clean package
+- Salida: paquete-despliegue/Aether2.0-paquete-despliegue.zip

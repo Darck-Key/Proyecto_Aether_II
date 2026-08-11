@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.demoaether.HelloController"
+            stylesheets="@aether.css">
+
+    <!-- Margen general -->
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+
+    <!-- BARRA SUPERIOR -->
+    <top>
+        <!-- ========================================================= -->
+        <!-- ENCABEZADO (HEADER) DE LA APLICACIÓN                      -->
+        <!-- Todo este HBox corresponde a la barra superior.           -->
+        <!-- ========================================================= -->
+
+        <HBox spacing="30"
+              alignment="CENTER_LEFT"
+              styleClass="top-card">
+
+            <children>
+
+                <!-- ========================================================= -->
+                <!-- BLOQUE 1: Logo de la misión + nombre del sistema          -->
+                <!-- ========================================================= -->
+
+                <HBox spacing="15"
+                      alignment="CENTER_LEFT"
+                      prefWidth="360">
+
+                    <children>
+
+                        <!-- Logo -->
+                        <ImageView
+                                fitWidth="70"
+                                fitHeight="70"
+                                preserveRatio="true">
+
+                            <image>
+
+                                <!-- Ruta de la imagen dentro de resources -->
+                                <Image url="@imagenes/aether-logo-160.png"/>
+
+                            </image>
+
+                        </ImageView>
+
+                        <!-- Nombre del sistema -->
+                        <VBox spacing="2">
+
+                            <children>
+
+                                <!-- Nombre principal -->
+                                <Label text="AETHER"
+                                       styleClass="title"/>
+
+                                <!-- Subtítulo -->
+                                <Label text="Mission Control Simulator"
+                                       styleClass="subtitle"/>
+
+                            </children>
+
+                        </VBox>
+
+                    </children>
+
+                </HBox>
+
+                <!-- ========================================================= -->
+                <!-- BLOQUE 2: Misión activa                                   -->
+                <!-- fx:id permite cambiar el texto desde Java                 -->
+                <!-- ========================================================= -->
+
+                <VBox spacing="3">
+
+                    <children>
+
+                        <Label text="MISIÓN ACTIVA"/>
+
+                        <Label
+                                fx:id="lblMision"
+                                text="ARTEMIS II"/>
+
+                    </children>
+
+                </VBox>
+
+                <!-- ========================================================= -->
+                <!-- BLOQUE 3: Tiempo de misión                                -->
+                <!-- ========================================================= -->
+
+                <VBox spacing="3">
+
+                    <children>
+
+                        <Label text="TIEMPO DE MISIÓN"/>
+
+                        <Label
+                                fx:id="lblTiempo"
+                                text="00:00:00"/>
+
+                    </children>
+
+                </VBox>
+
+                <!-- ========================================================= -->
+                <!-- BLOQUE 4: Estado de la misión                             -->
+                <!-- ========================================================= -->
+
+                <VBox spacing="3">
+
+                    <children>
+
+                        <Label text="ESTADO"/>
+
+                        <Label
+                                fx:id="lblEstado"
+                                text="NOMINAL"/>
+
+                    </children>
+
+                </VBox>
+
+                <!-- ========================================================= -->
+                <!-- BLOQUE 5: Conectividad                                    -->
+                <!-- ========================================================= -->
+
+                <VBox spacing="3">
+
+                    <children>
+
+                        <Label text="CONECTIVIDAD"/>
+
+                        <Label
+                                fx:id="lblConectividad"
+                                text="100%"/>
+
+                    </children>
+
+                </VBox>
+
+                <!-- ========================================================= -->
+                <!-- BLOQUE 6: Tripulación                                     -->
+                <!-- ========================================================= -->
+
+                <VBox spacing="3">
+
+                    <children>
+
+                        <Label text="TRIPULACIÓN"/>
+
+                        <ImageView
+                                fitWidth="150"
+                                fitHeight="52"
+                                preserveRatio="true">
+                            <image>
+                                <Image url="@imagenes/crew.png"/>
+                            </image>
+                        </ImageView>
+
+                    </children>
+
+                </VBox>
+
+            </children>
+
+        </HBox>
+
+    </top>
+
+    <!-- PANEL IZQUIERDO -->
+    <left>
+
+        <VBox spacing="12"
+              prefWidth="260"
+              styleClass="panel">
+
+            <children>
+
+                <Label text="FASES DE MISIÓN"
+                       styleClass="section-title"/>
+
+                <HBox spacing="12" alignment="CENTER_LEFT" styleClass="card" prefHeight="66">
+                    <children>
+                        <ImageView fitWidth="54"
+                                   fitHeight="54"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@imagenes/fase1.png"/>
+                            </image>
+                        </ImageView>
+                        <Label text="Lanzamiento"/>
+                    </children>
+                </HBox>
+
+                <HBox spacing="12" alignment="CENTER_LEFT" styleClass="card" prefHeight="66">
+                    <children>
+                        <ImageView fitWidth="54"
+                                   fitHeight="54"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@imagenes/fase2.png"/>
+                            </image>
+                        </ImageView>
+                        <Label text="Órbita Terrestre"/>
+                    </children>
+                </HBox>
+
+                <HBox spacing="12" alignment="CENTER_LEFT" styleClass="card" prefHeight="66">
+                    <children>
+                        <ImageView fitWidth="54"
+                                   fitHeight="54"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@imagenes/fase3.png"/>
+                            </image>
+                        </ImageView>
+                        <Label text="Inyección Translunar"/>
+                    </children>
+                </HBox>
+
+                <HBox spacing="12" alignment="CENTER_LEFT" styleClass="card" prefHeight="66">
+                    <children>
+                        <ImageView fitWidth="54"
+                                   fitHeight="54"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@imagenes/fase4.png"/>
+                            </image>
+                        </ImageView>
+                        <Label text="Costa Translunar"/>
+                    </children>
+                </HBox>
+
+                <HBox spacing="12" alignment="CENTER_LEFT" styleClass="card" prefHeight="66">
+                    <children>
+                        <ImageView fitWidth="54"
+                                   fitHeight="54"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@imagenes/fase5.png"/>
+                            </image>
+                        </ImageView>
+                        <Label text="Sobrevuelo Lunar"/>
+                    </children>
+                </HBox>
+
+                <HBox spacing="12" alignment="CENTER_LEFT" styleClass="card" prefHeight="66">
+                    <children>
+                        <ImageView fitWidth="54"
+                                   fitHeight="54"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@imagenes/fase6.png"/>
+                            </image>
+                        </ImageView>
+                        <Label text="Retorno Libre"/>
+                    </children>
+                </HBox>
+
+                <HBox spacing="12" alignment="CENTER_LEFT" styleClass="card" prefHeight="66">
+                    <children>
+                        <ImageView fitWidth="54"
+                                   fitHeight="54"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@imagenes/fase7.png"/>
+                            </image>
+                        </ImageView>
+                        <Label text="Reingreso"/>
+                    </children>
+                </HBox>
+
+                <VBox spacing="8" styleClass="card">
+                    <children>
+                        <Button fx:id="btnOpciones" onAction="#onOpcionesClicked" text="Opciones"
+                                prefWidth="220"
+                                prefHeight="44"
+                                alignment="CENTER_LEFT"
+                                contentDisplay="LEFT"
+                                graphicTextGap="12"
+                                style="-fx-background-color: #120B25; -fx-border-color: #7A4FA3; -fx-border-width: 1; -fx-background-radius: 8; -fx-border-radius: 8; -fx-text-fill: #E7D8F0; -fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 7 12 7 12; -fx-cursor: hand;">
+                            <graphic>
+                                <ImageView fitWidth="32"
+                                           fitHeight="32"
+                                           preserveRatio="true">
+                                    <image>
+                                        <Image url="@imagenes/opciones.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="btnReportes" onAction="#onReportesClicked" text="Reportes"
+                                prefWidth="220"
+                                prefHeight="44"
+                                alignment="CENTER_LEFT"
+                                contentDisplay="LEFT"
+                                graphicTextGap="12"
+                                style="-fx-background-color: #120B25; -fx-border-color: #7A4FA3; -fx-border-width: 1; -fx-background-radius: 8; -fx-border-radius: 8; -fx-text-fill: #E7D8F0; -fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 7 12 7 12; -fx-cursor: hand;">
+                            <graphic>
+                                <ImageView fitWidth="32"
+                                           fitHeight="32"
+                                           preserveRatio="true">
+                                    <image>
+                                        <Image url="@imagenes/reportes.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </VBox>
+
+            </children>
+
+        </VBox>
+
+    </left>
+
+    <!-- CENTRO -->
+    <center>
+
+        <VBox spacing="15">
+
+            <children>
+
+                <VBox styleClass="panel">
+
+                    <children>
+
+                        <Label text="MAPA DE MISIÓN"
+                               styleClass="section-title"/>
+
+                                                <VBox spacing="8">
+                            <children>
+                                <Pane fx:id="missionMapContainer" prefHeight="376" style="-fx-background-color: #080413; -fx-border-color: #7A4FA3; -fx-border-width: 1; -fx-background-radius: 8; -fx-border-radius: 8;"/>
+                                <HBox spacing="8" alignment="CENTER_LEFT">
+                                    <children>
+                                        <Button text="Zoom +" onAction="#onMapZoomInClicked" style="-fx-background-color: #1F1736; -fx-border-color: #6FD6FF; -fx-border-width: 1; -fx-background-radius: 7; -fx-border-radius: 7; -fx-text-fill: #E7D8F0; -fx-font-weight: bold;"/>
+                                        <Button text="Zoom -" onAction="#onMapZoomOutClicked" style="-fx-background-color: #1F1736; -fx-border-color: #6FD6FF; -fx-border-width: 1; -fx-background-radius: 7; -fx-border-radius: 7; -fx-text-fill: #E7D8F0; -fx-font-weight: bold;"/>
+                                        <Button text="Restablecer cámara" onAction="#onMapResetCameraClicked" style="-fx-background-color: #1F1736; -fx-border-color: #6FD6FF; -fx-border-width: 1; -fx-background-radius: 7; -fx-border-radius: 7; -fx-text-fill: #E7D8F0; -fx-font-weight: bold;"/>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+
+                    </children>
+
+                </VBox>
+
+                <HBox spacing="15">
+
+                    <children>
+
+                        <VBox styleClass="panel"
+                              prefWidth="250"
+                              prefHeight="180">
+
+                            <children>
+
+                                <Label text="EVENTOS RECIENTES"
+                                       styleClass="section-title"/>
+
+                                <Label fx:id="lblRecentEvent1" text="Eventos: pendiente"/>
+                                <Label fx:id="lblRecentEvent2" text=""/>
+                                <Label fx:id="lblRecentEvent3" text=""/>
+
+                            </children>
+
+                        </VBox>
+
+                        <VBox styleClass="panel"
+                              prefWidth="220"
+                              prefHeight="180">
+
+                            <children>
+
+                                <Label text="SISTEMAS"
+                                       styleClass="section-title"/>
+
+                                                                <Label fx:id="lblOrekitStatus" text="Orekit: pendiente"/>
+                                <Label fx:id="lblLastCalculation" text="Ultimo calculo: pendiente"/>
+                                <Label fx:id="lblLastReport" text="Ultimo reporte: pendiente"/>
+                                <Label fx:id="lblPersistenceStatus" text="MySQL: interfaz lista"/>
+
+                            </children>
+
+                        </VBox>
+
+                        <VBox styleClass="panel"
+                              prefWidth="220"
+                              prefHeight="180">
+
+                            <children>
+
+                                <Label text="TRIPULACIÓN"
+                                       styleClass="section-title"/>
+
+                                <HBox spacing="8" alignment="CENTER_LEFT">
+                                    <children>
+                                        <ImageView fitWidth="28"
+                                                   fitHeight="28"
+                                                   preserveRatio="true">
+                                            <image>
+                                                <Image url="@imagenes/astronauta.png"/>
+                                            </image>
+                                        </ImageView>
+                                        <Label text="Comandante: OK"/>
+                                    </children>
+                                </HBox>
+                                <HBox spacing="8" alignment="CENTER_LEFT">
+                                    <children>
+                                        <ImageView fitWidth="28"
+                                                   fitHeight="28"
+                                                   preserveRatio="true">
+                                            <image>
+                                                <Image url="@imagenes/astronauta.png"/>
+                                            </image>
+                                        </ImageView>
+                                        <Label text="Piloto: OK"/>
+                                    </children>
+                                </HBox>
+                                <HBox spacing="8" alignment="CENTER_LEFT">
+                                    <children>
+                                        <ImageView fitWidth="28"
+                                                   fitHeight="28"
+                                                   preserveRatio="true">
+                                            <image>
+                                                <Image url="@imagenes/astronauta.png"/>
+                                            </image>
+                                        </ImageView>
+                                        <Label text="Especialista: OK"/>
+                                    </children>
+                                </HBox>
+
+                            </children>
+
+                        </VBox>
+
+                        <VBox styleClass="panel"
+                              prefWidth="250"
+                              prefHeight="180">
+
+                            <children>
+
+                                <Label text="PRÓXIMO EVENTO"
+                                       styleClass="section-title"/>
+
+                                <Label fx:id="lblCurrentPhase" text="Fase actual: espera"/>
+                                <Label fx:id="lblNextEvent" text="Siguiente: Lanzamiento"/>
+
+                            </children>
+
+                        </VBox>
+
+                    </children>
+
+                </HBox>
+
+            </children>
+
+        </VBox>
+
+    </center>
+
+    <!-- TELEMETRÍA -->
+    <right>
+
+        <VBox spacing="12"
+              prefWidth="260"
+              styleClass="panel">
+
+            <children>
+
+                <Label text="TELEMETRÍA"
+                       styleClass="section-title"/>
+
+                <VBox spacing="5" styleClass="card">
+                    <children>
+                        <Label text="VELOCIDAD" graphicTextGap="10">
+                            <graphic>
+                                <ImageView fitWidth="32"
+                                           fitHeight="32"
+                                           preserveRatio="true">
+                                    <image>
+                                        <Image url="@imagenes/velocidad.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+                        <Label fx:id="lblVelocidad"
+                               text="--- km/s"
+                               styleClass="value"/>
+                    </children>
+                </VBox>
+
+                <VBox spacing="5" styleClass="card">
+                    <children>
+                        <Label text="ALTITUD" graphicTextGap="10">
+                            <graphic>
+                                <ImageView fitWidth="32"
+                                           fitHeight="32"
+                                           preserveRatio="true">
+                                    <image>
+                                        <Image url="@imagenes/altitud.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+                        <Label fx:id="lblAltitud"
+                               text="--- km"
+                               styleClass="value"/>
+                    </children>
+                </VBox>
+
+                <VBox spacing="5" styleClass="card">
+                    <children>
+                        <Label text="DISTANCIA A LA LUNA" graphicTextGap="10">
+                            <graphic>
+                                <ImageView fitWidth="32"
+                                           fitHeight="32"
+                                           preserveRatio="true">
+                                    <image>
+                                        <Image url="@imagenes/distaciaalaluna.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+                        <Label fx:id="lblDistanciaLuna"
+                               text="--- km"
+                               styleClass="value"/>
+                    </children>
+                </VBox>
+
+                <VBox spacing="5" styleClass="card">
+                    <children>
+                        <Label text="COMBUSTIBLE" graphicTextGap="10">
+                            <graphic>
+                                <ImageView fitWidth="32"
+                                           fitHeight="32"
+                                           preserveRatio="true">
+                                    <image>
+                                        <Image url="@imagenes/combustible.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+                        <Label fx:id="lblCombustible"
+                               text="100 %"
+                               styleClass="value"/>
+                        <ProgressBar fx:id="pbCombustible"
+                                     progress="1.0"
+                                     prefWidth="220"/>
+                    </children>
+                </VBox>
+
+                <VBox spacing="5" styleClass="card">
+                    <children>
+                        <Label text="TIEMPO DESDE LANZAMIENTO" graphicTextGap="10">
+                            <graphic>
+                                <ImageView fitWidth="32"
+                                           fitHeight="32"
+                                           preserveRatio="true">
+                                    <image>
+                                        <Image url="@imagenes/tiempo.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+                        <Label fx:id="lblTiempoLanzamiento"
+                               text="00:00:00"
+                               styleClass="value"/>
+                    </children>
+                </VBox>
+
+                <VBox spacing="5" styleClass="card">
+                    <children>
+                        <Label text="ESTADO DEL SISTEMA" graphicTextGap="10">
+                            <graphic>
+                                <ImageView fitWidth="32"
+                                           fitHeight="32"
+                                           preserveRatio="true">
+                                    <image>
+                                        <Image url="@imagenes/estado.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Label>
+                        <Label fx:id="lblEstadoSistema"
+                               text="NOMINAL"
+                               styleClass="value"/>
+                    </children>
+                </VBox>
+
+            </children>
+
+        </VBox>
+
+    </right>
+
+</BorderPane>

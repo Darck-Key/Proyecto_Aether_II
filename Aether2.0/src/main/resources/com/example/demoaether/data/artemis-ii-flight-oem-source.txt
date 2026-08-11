@@ -1,0 +1,18 @@
+Fuente: NASA/JSC/FOD/FDO
+Formato: CCSDS OEM 2.0, EME2000, UTC
+Archivo original: Artemis_II_OEM_2026_04_10_Post-ICPS-Sep-to-EI.asc
+Cobertura: separacion de ICPS hasta interfaz de entrada de Artemis II
+SHA-256: 9DEF718E2AEFE3205E0FF4E2546DB0E06763C07A8FCCCAD8DC01929B9D9C5859
+Pagina oficial: https://www.nasa.gov/missions/artemis/artemis-2/track-nasas-artemis-ii-mission-in-real-time/
+Descarga oficial: https://www.nasa.gov/wp-content/uploads/2026/03/all-artemis-ii-oem-files.zip
+
+Este recurso se distribuye con AETHER para que la simulacion de referencia
+funcione sin Internet. ArtemisReferenceTrajectoryLoader lo entrega a OemParser
+de Orekit; no contiene una ruta dibujada manualmente por la interfaz.
+
+El ZIP oficial contiene revisiones sucesivas y superpuestas de la misma
+prediccion de vuelo. AETHER usa la revision final del 10 de abril; no concatena
+versiones anteriores porque eso duplicaria fechas y produciria saltos falsos.
+El primer vector ya corresponde a Orion en orbita terrestre alta, despues de
+la separacion del ICPS. El lanzamiento y el ascenso no forman parte del OEM
+publico, por lo que el mapa no inventa esos puntos.
